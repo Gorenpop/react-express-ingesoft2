@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 
+const URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
+
 function App() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/personas');
+        const res = await fetch(`${URL}/api/personas`);
         const data = await res.json();
-        setUsers(data.users);  // Aquí actualizamos el estado con los usuarios recibidos
+        setUsers(data.users);   
       } catch (error) {
         console.error('Error fetching data:', error);
       }
