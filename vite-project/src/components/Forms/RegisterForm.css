@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+.Register-Forms {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 100px;
+}
+
+label {
+  display: block;
+  margin: 10px;
+  color: #6BA2A9;
+}
+
+input,
+select {
+  width: 100%;
+  height: 100%;
+  background: #072E33;
+  border: none;
+  outline: none;
+  border: 3px solid rgba(255, 255, 255, .2);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #ffff;
+  padding: 10px 15px 10px 10px;
+}
+
+
+button {
+  width: 100%;
+  height: 45px;
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  font-weight: 700;
+}
+
+.checkbox {
+  position: relative;
+  font-size: 20px;
+}

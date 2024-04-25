@@ -1,0 +1,290 @@
+.main-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    margin-left: 30px;
+    margin-right: 30px;
+
+}
+
+
+
+/* contenedor de perfil */
+
+.profile-container {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 200px;
+    width: 100%;
+
+}
+
+.profile-container .main-panel {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+    position: relative;
+}
+
+.profile-container .main-panel .avatar-panel {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+.profile-container .main-panel .avatar-panel .user-avatar {
+    position: relative;
+    width: 120px;
+}
+
+.avatar img {
+    border-radius: 100%;
+    height: 100%;
+    transition: .2s;
+    width: 100%;
+}
+
+.profile-container .main-panel .avatar-panel .user-avatar:after {
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.profile-container .main-panel .avatar-panel .user-links {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+}
+
+.profile-container .main-panel .avatar-panel .user-links .title {
+    align-items: center;
+    display: flex;
+    margin: 7.5px;
+}
+
+.profile-container .main-panel .avatar-panel .user-links .title .user-nickname {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 30px;
+    color: #6BA2A9;
+}
+
+.profile-container .main-panel .avatar-panel .user-links .ig-profile-info-date {
+    color: #0C7078;
+    margin: 7.5px;
+}
+
+.separator {
+    height: 60px;
+}
+
+
+
+/* tabs de usuario */
+
+.profile-container .user-profile-tabs .fa-solid.fa-chevron-right {
+    margin-top: 2px;
+    color: #6BA2A9;
+}
+
+.profile-container .user-profile-tabs {
+    box-shadow: 0 1px 0 0 #a7564470;
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+}
+
+
+.profile-container .user-profile-tabs li {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    position: relative;
+}
+
+
+.profile-container .user-profile-tabs li a.active {
+    color: #a75644;
+    box-shadow: 0 5px 0 0 #a75644;
+
+}
+
+
+.profile-container .user-profile-tabs li a {
+    align-items: center;
+    font-weight: 700;
+    padding: 0 15px 20px;
+    white-space: nowrap;
+    color: #6BA2A9;
+    text-decoration: none;
+    font-size: 1.2rem;
+    display: flex;
+
+
+}
+
+
+
+
+
+.profile-container .user-profile-tabs li a:hover {
+    color: #a75644;
+}
+
+
+
+/* tabs de settings de usuario */
+
+.user-profile-settings {
+    display: flex;
+}
+
+.user-profile-settings .user-profile-settings-tabs {
+    display: none;
+}
+
+.user-profile-settings .user-profile-settings-tabs.active {
+    border-right: 1px solid #a7564470;
+    display: flex;
+    flex-direction: column;
+    margin: -15px 60px -15px -15px;
+
+}
+
+
+.user-profile-settings .user-profile-settings-tabs li {
+    margin: 15px;
+    position: relative;
+
+}
+
+.user-profile-settings .user-profile-settings-tabs li a {
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    font-weight: 700;
+    padding: 0 15px 20px;
+    white-space: nowrap;
+    color: #6BA2A9;
+    text-decoration: none;
+    font-size: 1.2rem;
+    text-align: left;
+}
+
+.user-profile-settings .user-profile-settings-tabs li a:hover {
+    color: #a75644;
+
+    .lines .title {
+        color: #a75644;
+    }
+}
+
+.user-profile-settings .user-profile-settings-tabs li a.active {
+    color: #a75644;
+
+    .lines .title {
+        color: #a75644;
+    }
+}
+
+.user-profile-settings .user-profile-settings-tabs li a .lines {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    width: 100%;
+}
+
+.user-profile-settings .user-profile-settings-tabs li a .fa-solid {
+    margin-right: 20px;
+
+}
+
+
+.user-profile-settings .user-profile-settings-tabs li a .lines .title {
+    color: #6BA2A9;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 3px;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+}
+
+.user-profile-settings .user-profile-settings-tabs li a .lines span:not(.title) {
+    color: #0C7078;
+}
+
+.separator {
+    height: 60px;
+}
+
+
+
+/* contenido de settings content */
+
+.user-profile-settings .settings-content {
+    width: 100%;
+}
+
+.avatar {
+    background-size: 100%;
+    display: flex;
+}
+
+.user-profile-settings .settings-content .tab-content-settings {
+    display: flex;
+    flex-direction: column;
+
+    .profile-info.active {
+        display: block;
+    }
+
+    .profile-info {
+        display: none;
+    }
+
+    .nickavatar {
+        display: flex;
+        margin: 15px;
+        margin-bottom: 0 !important;
+
+        .avatar-picture {
+            display: flex;
+            flex-direction: column;
+            margin-right: 30px;
+            width: 300px;
+
+            .ig-profile-avatar-edit {
+                align-items: center;
+                color: var(--color-light);
+                cursor: pointer;
+                display: flex;
+
+                .avatar img {
+                    width: 58px;
+                }
+            }
+        }
+
+
+    }
+
+    .settings-subtitle {
+        font-size: 19px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+}

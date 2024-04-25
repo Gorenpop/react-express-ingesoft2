@@ -1,0 +1,54 @@
+.hero {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    display: inline-block;
+    background: #05161A;
+}
+
+.Hero-Image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.45;
+    mask-image: linear-gradient(#05161A 70%, transparent);
+
+}
+
+
+.hero-text {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+
+    h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        background: #ffffff;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+        color: #ffffff;
+        padding: 0.5rem 0 2rem 0;
+    }
+
+    .collection-request {
+        text-decoration: none;
+        background: white;
+        padding: 1rem 2rem;
+        border-radius: 6px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: #a75644;
+    }
+}
+
+.collection-request:hover {
+    background: #a75644;
+    color: white;
+}
