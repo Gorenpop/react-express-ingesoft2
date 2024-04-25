@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Municipios {
+  municipioId Int        @id
+  nombre      String?    @db.VarChar(50)
+  poblacion   Int?
+  alcalde     String?    @db.VarChar(50)
+  Vivienda    Vivienda[]
+}
+
+model Persona {
+  personaId     Int        @id
+  nombre        String?    @db.VarChar(50)
+  edad          Int?
+  sexo          String?    @db.VarChar(10)
+  email         String?    @db.VarChar(50)
+  cabezaFamilia Boolean?
+  municipioId   Int?
+  viviendaId    Int?
+  Vivienda      Vivienda[]
+}
+
+model Vehiculos {
+  vehiculoId Int        @id
+  tipo       String?    @db.VarChar(50)
+  viviendaId Int?
+  personaId  Int?
+  Vivienda   Vivienda[]
+}
+
+model Vivienda {
+  viviendaId    Int         @id
+  direccion     String?     @db.VarChar(100)
+  municipioId   Int?
+  cabezaFamilia Int?
+  vehiculoId    Int?
+  Municipios    Municipios? @relation(fields: [municipioId], references: [municipioId], onDelete: NoAction, onUpdate: NoAction, map: "Vivienda_ibfk_1")
+  Persona       Persona?    @relation(fields: [cabezaFamilia], references: [personaId], onDelete: NoAction, onUpdate: NoAction, map: "Vivienda_ibfk_2")
+  Vehiculos     Vehiculos?  @relation(fields: [vehiculoId], references: [vehiculoId], onDelete: NoAction, onUpdate: NoAction, map: "Vivienda_ibfk_3")
+
+  @@index([cabezaFamilia], map: "cabezaFamilia")
+  @@index([municipioId], map: "municipioId")
+  @@index([vehiculoId], map: "vehiculoId")
+}
