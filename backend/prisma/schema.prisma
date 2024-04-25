@@ -7,45 +7,53 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Municipios {
-  municipioId Int        @id
-  nombre      String?    @db.VarChar(50)
-  poblacion   Int?
-  alcalde     String?    @db.VarChar(50)
-  Vivienda    Vivienda[]
+model api_order {
+  id              BigInt            @id @default(autoincrement())
+  idOrder         Int?
+  quality         String?           @db.VarChar(255)
+  amount          Int?
+  price           Float?            @db.Float
+  destiny         String?           @db.VarChar(255)
+  type            Int?              @db.SmallInt
+  idBuyer_id      BigInt?
+  api_user        api_user?         @relation(fields: [idBuyer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "api_order_ibfk_1")
+  api_recolection api_recolection[]
+
+  @@index([idBuyer_id], map: "idx_api_order_idBuyer_id")
 }
 
-model Persona {
-  personaId     Int        @id
-  nombre        String?    @db.VarChar(50)
-  edad          Int?
-  sexo          String?    @db.VarChar(10)
-  email         String?    @db.VarChar(50)
-  cabezaFamilia Boolean?
-  municipioId   Int?
-  viviendaId    Int?
-  Vivienda      Vivienda[]
+model api_recolection {
+  id            BigInt     @id @default(autoincrement())
+  idRecolection Int?
+  date          DateTime?  @db.DateTime(6)
+  place         String?    @db.VarChar(255)
+  owner         String?    @db.VarChar(255)
+  amount        Float?     @db.Float
+  idOrder_id    BigInt?
+  api_order     api_order? @relation(fields: [idOrder_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "api_recolection_ibfk_1")
+
+  @@index([idOrder_id], map: "idx_api_recolection_idOrder_id")
 }
 
-model Vehiculos {
-  vehiculoId Int        @id
-  tipo       String?    @db.VarChar(50)
-  viviendaId Int?
-  personaId  Int?
-  Vivienda   Vivienda[]
+model api_task {
+  id          BigInt   @id @default(autoincrement())
+  title       String?  @db.VarChar(255)
+  description String?  @db.LongText
+  completed   Boolean?
 }
 
-model Vivienda {
-  viviendaId    Int         @id
-  direccion     String?     @db.VarChar(100)
-  municipioId   Int?
-  cabezaFamilia Int?
-  vehiculoId    Int?
-  Municipios    Municipios? @relation(fields: [municipioId], references: [municipioId], onDelete: NoAction, onUpdate: NoAction, map: "Vivienda_ibfk_1")
-  Persona       Persona?    @relation(fields: [cabezaFamilia], references: [personaId], onDelete: NoAction, onUpdate: NoAction, map: "Vivienda_ibfk_2")
-  Vehiculos     Vehiculos?  @relation(fields: [vehiculoId], references: [vehiculoId], onDelete: NoAction, onUpdate: NoAction, map: "Vivienda_ibfk_3")
-
-  @@index([cabezaFamilia], map: "cabezaFamilia")
-  @@index([municipioId], map: "municipioId")
-  @@index([vehiculoId], map: "vehiculoId")
+model api_user {
+  id           BigInt      @id @default(autoincrement())
+  idUser       Int?
+  username     String?     @db.VarChar(100)
+  email        String?     @db.VarChar(255)
+  first_name   String?     @db.VarChar(255)
+  second_name  String?     @db.VarChar(255)
+  isBuyer      Boolean?
+  isSeller     Boolean?
+  organization String?     @db.VarChar(255)
+  role         String?     @db.VarChar(255)
+  lastSession  DateTime?   @db.DateTime(6)
+  created_at   DateTime?   @db.DateTime(6)
+  api_order    api_order[]
 }

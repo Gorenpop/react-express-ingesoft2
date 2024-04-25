@@ -3,26 +3,43 @@ import { PrismaClient } from "@prisma/client";
 const db = new PrismaClient();
 
 export async function getModels() {
-    const introspectionResult = await db.$executeRaw`SELECT table_name FROM information_schema.tables WHERE table_schema = database();`;
-    
-    if (introspectionResult) {
-        const models = [];
-        for (let i = 0; i < introspectionResult.length; i++) {
-            models.push(introspectionResult[i][0].table_name);
+    try {
+        const introspectionResult = await db.$queryRaw`SELECT table_name FROM information_schema.tables WHERE table_schema = database();`;        
+        if (introspectionResult) {
+            const models = introspectionResult.map(row => row.TABLE_NAME);  // Accede a TABLE_NAME en mayúsculas
+            return models;
+        } else {
+            throw new Error("introspectionResult is not available");
         }
-        return models;
-    } else {
-        throw new Error("introspectionResult is not available");
+    } catch (error) {
+        throw new Error(`Error fetching models: ${error.message}`);
     }
 }
 
+
+
+
 export async function getUsers() {
     try {
-        return await db.persona.findMany();
+        const users = await db.api_user.findMany();
+        // Convertir BigInt a cadenas antes de enviarlos
+        const formattedUsers = users.map(user => {
+            const formattedUser = {
+                ...user,
+                id: user.id ? user.id.toString() : null,
+                idUser: user.idUser ? user.idUser.toString() : null,
+                idBuyer_id: user.idBuyer_id ? user.idBuyer_id.toString() : null,
+                idOrder_id: user.idOrder_id ? user.idOrder_id.toString() : null
+            };
+            return formattedUser;
+        });
+        return formattedUsers;
     } catch (error) {
         throw new Error(`Error fetching users: ${error.message}`);
     }
 }
+
+
 
 export async function disconnect() {
     await db.$disconnect();

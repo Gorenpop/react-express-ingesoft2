@@ -20,7 +20,7 @@ app.get('/api/models', async (req, res) => {
     }
 });
 
-app.get('/api/personas', async (req, res) => {
+app.get('/api/users', async (req, res) => {
     try {
         const users = await getUsers();
         res.send({ users });
@@ -30,4 +30,8 @@ app.get('/api/personas', async (req, res) => {
     }
 });
 
-process.on('exit', disconnect);
+// Asegúrate de desconectar la base de datos cuando el servidor se detenga
+process.on('SIGINT', async () => {
+    await disconnect();
+    process.exit();
+});
