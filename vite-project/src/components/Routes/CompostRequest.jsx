@@ -35,7 +35,7 @@ function CompostRequest() {
         };
 
         try {
-            const response = await axios.post('http://localhost:3000/api/recolecta', dataToSend);
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/recolecta`, dataToSend);
             console.log(response.data);
         } catch (error) {
             console.error('Error adding recolecta:', error);
