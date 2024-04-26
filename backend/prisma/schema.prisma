@@ -8,43 +8,40 @@ datasource db {
 }
 
 model api_order {
-  id              BigInt            @id @default(autoincrement())
-  idOrder         Int?
-  quality         String?           @db.VarChar(255)
-  amount          Int?
-  price           Float?            @db.Float
-  destiny         String?           @db.VarChar(255)
-  type            Int?              @db.SmallInt
-  idBuyer_id      BigInt?
-  api_user        api_user?         @relation(fields: [idBuyer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "api_order_ibfk_1")
-  api_recolection api_recolection[]
+  idOrder          BigInt            @id @default(autoincrement())
+  quality          String?           @db.VarChar(255)
+  amount           Int?
+  price            Float?            @db.Float
+  destiny          String?           @db.VarChar(255)
+  type             Int?              @db.SmallInt
+  idUser_id        BigInt?
+  api_user         api_user?         @relation(fields: [idUser_id], references: [idUser], onDelete: NoAction, onUpdate: NoAction, map: "api_order_ibfk_1")
+  api_recolezction api_recolection[]
 
-  @@index([idBuyer_id], map: "idx_api_order_idBuyer_id")
+  @@index([idUser_id], map: "idx_api_order_idUser_id")
 }
 
 model api_recolection {
-  id            BigInt     @id @default(autoincrement())
-  idRecolection Int?
+  idRecolection BigInt     @id @default(autoincrement())
   date          DateTime?  @db.DateTime(6)
   place         String?    @db.VarChar(255)
   owner         String?    @db.VarChar(255)
   amount        Float?     @db.Float
   idOrder_id    BigInt?
-  api_order     api_order? @relation(fields: [idOrder_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "api_recolection_ibfk_1")
+  api_order     api_order? @relation(fields: [idOrder_id], references: [idOrder], onDelete: NoAction, onUpdate: NoAction, map: "api_recolection_ibfk_1")
 
   @@index([idOrder_id], map: "idx_api_recolection_idOrder_id")
 }
 
 model api_task {
-  id          BigInt   @id @default(autoincrement())
+  idTask      BigInt   @id @default(autoincrement())
   title       String?  @db.VarChar(255)
   description String?  @db.LongText
   completed   Boolean?
 }
 
 model api_user {
-  id           BigInt      @id @default(autoincrement())
-  idUser       Int?
+  idUser       BigInt      @id @default(autoincrement())
   username     String?     @db.VarChar(100)
   email        String?     @db.VarChar(255)
   first_name   String?     @db.VarChar(255)

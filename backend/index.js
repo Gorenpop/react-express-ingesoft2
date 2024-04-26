@@ -1,37 +1,31 @@
 import express from 'express';
 import cors from 'cors';
-import { getModels, getUsers, disconnect } from './db.js';
+import { postRecolecta } from './db.js';
 
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
 app.listen(3000, () => {
     console.log('Server started');
 });
 
-app.get('/api/models', async (req, res) => {
-    try {
-        const models = await getModels();
-        res.send({ models });
-    } catch (error) {
-        console.error('Error fetching models:', error);
-        res.status(500).send({ error: error.message });
-    }
-});
-
-app.get('/api/users', async (req, res) => {
-    try {
-        const users = await getUsers();
-        res.send({ users });
-    } catch (error) {
-        console.error('Error fetching users:', error);
-        res.status(500).send({ error: error.message });
-    }
-});
-
-// Asegúrate de desconectar la base de datos cuando el servidor se detenga
 process.on('SIGINT', async () => {
     await disconnect();
     process.exit();
 });
+
+
+app.post('/api/recolecta', async (req, res) => {
+    const data = req.body; 
+    console.log(data)
+    try {
+        const models = await postRecolecta(data);
+        res.status(201).send({ success: true, data: models }); // Devuelve un código 201 (Created) y los datos insertados
+    } catch (error) {
+        console.error('Error adding recolecta:', error);
+        res.status(500).send({ success: false, error: error.message }); // Devuelve un código 500 (Internal Server Error) y el mensaje de error
+    }
+});
+

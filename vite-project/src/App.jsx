@@ -9,32 +9,11 @@ import Productos from './components/Routes/productos';
 import Cuenta from './components/Routes/cuenta';
 import LoginForm from './components/Forms/LoginForms.jsx';
 import RegisterForm from './components/Forms/RegisterForm.jsx';
-
+import CompostRequest from './components/Routes/CompostRequest';
 
 const URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
 
 function App() {
-  /*
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(`${URL}/api/personas`);
-        const data = await res.json();
-        setUsers(data.users);   
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  []);*/
-//<ul>
-  //{users.map((user, index) => (
-    //<li key={index}>{user.nombre}</li> 
-  //))}
-//</ul>
    return (
     <div className='App'>
       <Routes>
@@ -44,6 +23,8 @@ function App() {
         <Route path="/products" element={<Productos />} />
         <Route path="/LoginForm" element={<LoginForm />} />
         <Route path="/RegisterForm" element={<RegisterForm />} />
+
+        <Route path="/compost-request" element={<CompostRequest />} />
 
         {/* paths a diferentes tabs de profile en Cuenta */}
         <Route path="/active-collects" element={<Cuenta />} />

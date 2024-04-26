@@ -2,42 +2,48 @@ import { PrismaClient } from "@prisma/client";
 
 const db = new PrismaClient();
 
-export async function getModels() {
+export async function postRecolecta(data) {
     try {
-        const introspectionResult = await db.$queryRaw`SELECT table_name FROM information_schema.tables WHERE table_schema = database();`;        
-        if (introspectionResult) {
-            const models = introspectionResult.map(row => row.TABLE_NAME);  // Accede a TABLE_NAME en mayúsculas
-            return models;
+        const validQualities = ['super', 'alta', 'media'];
+        const validTypes = ['vegetal', 'animal', 'semi-industrial', 'semi-procesado'];
+
+        if (!validQualities.includes(data.quality)) {
+            throw new Error(`Invalid quality: ${data.quality}`);
+        }
+
+        if (!validTypes.includes(data.type)) {
+            throw new Error(`Invalid type: ${data.type}`);
+        }
+
+        const recolecta = await db.$queryRaw`
+            INSERT INTO api_order (
+                quality,
+                amount,
+                price,
+                destiny,
+                type,
+                idUser_id
+            )
+            VALUES (
+                ${data.quality},
+                ${data.amount},
+                ${data.price},
+                ${data.destiny},
+                ${data.type},
+                ${data.idUser_id}
+            )
+        `;
+        
+        if (recolecta) {
+            return recolecta;
         } else {
-            throw new Error("introspectionResult is not available");
+            throw new Error("recolecta is not available");
         }
     } catch (error) {
-        throw new Error(`Error fetching models: ${error.message}`);
+        throw new Error(`Error adding recolecta: ${error.message}`);
     }
 }
 
-
-
-
-export async function getUsers() {
-    try {
-        const users = await db.api_user.findMany();
-        // Convertir BigInt a cadenas antes de enviarlos
-        const formattedUsers = users.map(user => {
-            const formattedUser = {
-                ...user,
-                id: user.id ? user.id.toString() : null,
-                idUser: user.idUser ? user.idUser.toString() : null,
-                idBuyer_id: user.idBuyer_id ? user.idBuyer_id.toString() : null,
-                idOrder_id: user.idOrder_id ? user.idOrder_id.toString() : null
-            };
-            return formattedUser;
-        });
-        return formattedUsers;
-    } catch (error) {
-        throw new Error(`Error fetching users: ${error.message}`);
-    }
-}
 
 
 
