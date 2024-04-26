@@ -37,8 +37,13 @@ function CompostRequest() {
         try {
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/recolecta`, dataToSend);
             console.log(response.data);
+            // Muestra un mensaje de alerta
+            alert('¡La solicitud se envió correctamente!');
+            // Cierra la pestaña actual
+            window.location.href = "/";
         } catch (error) {
             console.error('Error adding recolecta:', error);
+            // Aquí puedes manejar el error, por ejemplo, mostrar un mensaje de error al usuario
         }
     };
 
