@@ -84,6 +84,8 @@ function Cuenta() {
                                 <div className="separator"></div>
                                 <div className="settings-content">
                                     <div className="tab-content-settings">
+                                        {/* <div className={UserProfileSettingsActiveTab === 0 && ProfileTabActiveTab === 4 ?
+                                            "profile-info active" : "profile-info"}></div> */}
                                         <div className={UserProfileSettingsActiveTab === 1 && ProfileTabActiveTab === 4 ?
                                             "profile-info active" : "profile-info"}>
                                             <div className="nickavatar">
@@ -92,12 +94,32 @@ function Cuenta() {
                                                     <div className="ig-profile-avatar-edit">
                                                         <Link className="avatar">
                                                             <img src={avatar} alt="Logo" className="ig-avatar" ></img>
-
                                                         </Link>
+                                                        <i class="fa-solid fa-camera"></i> .jpg .png
+                                                        <form className='ig-profile-avatar-editor'>
+                                                            <input type="file" name="avatar"></input>
+                                                            <input type="submit" className='ig-gradient-btn-pre'></input>
+                                                            <input type="hidden" name="process" value="update_avatar"></input>
+                                                        </form>
                                                     </div>
                                                 </div>
+                                                <div className="separator"></div>
+                                                <div className="nick">
+                                                    <span className="settings-subtitle">Nickname de usuario</span>
+                                                    <form className="nickname-editor">
+                                                        <input type="text" name="nickname" className='ig-profile-edit-input' maxLength={30} required></input>
+                                                        <input type="submit" className='nickname-submit'></input>
+                                                        <input type="hidden" name="process" value="update_nickname"></input>
+                                                    </form>
+                                                </div>
                                             </div>
+                                            <div class="separator"></div>
+
                                         </div>
+                                        {/* <div className={UserProfileSettingsActiveTab === 2 && ProfileTabActiveTab === 4 ?
+                                            "profile-info active" : "profile-info"}></div>
+                                        <div className={UserProfileSettingsActiveTab === 3 && ProfileTabActiveTab === 4 ?
+                                            "profile-info active" : "profile-info"}></div> */}
                                     </div>
                                 </div>
                             </div>

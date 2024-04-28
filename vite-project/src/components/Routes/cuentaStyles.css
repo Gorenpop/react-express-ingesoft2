@@ -8,6 +8,10 @@
 
 }
 
+.user-profile-layout {
+    display: flex;
+    flex-direction: column;
+}
 
 
 /* contenedor de perfil */
@@ -17,6 +21,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 200px;
+    max-width: 1200px;
     width: 100%;
 
 }
@@ -83,9 +88,6 @@
     margin: 7.5px;
 }
 
-.separator {
-    height: 60px;
-}
 
 
 
@@ -232,7 +234,7 @@
 /* contenido de settings content */
 
 .user-profile-settings .settings-content {
-    width: 100%;
+    margin: -15px;
 }
 
 .avatar {
@@ -241,11 +243,10 @@
 }
 
 .user-profile-settings .settings-content .tab-content-settings {
-    display: flex;
-    flex-direction: column;
 
     .profile-info.active {
-        display: block;
+        display: flex;
+        flex-direction: column;
     }
 
     .profile-info {
@@ -268,14 +269,76 @@
                 color: var(--color-light);
                 cursor: pointer;
                 display: flex;
+                color: #0C7078;
 
                 .avatar img {
                     width: 58px;
                 }
+
+                .fa-solid {
+                    margin-left: 20px;
+                    margin-right: 10px;
+                }
+            }
+
+            .ig-profile-avatar-editor {
+                display: none;
             }
         }
 
+        .nick {
+            width: 95%;
 
+            .nickname-editor {
+                align-items: center;
+                display: flex;
+
+                .ig-profile-edit-input {
+                    appearance: none;
+                    background-color: #0C707840;
+                    border: 0;
+                    border-radius: 7px;
+                    box-shadow: inset 0 0 0 2px #6BA2A940;
+                    color: #fff;
+                    font-family: barlow, arial, sans-serif;
+                    font-size: 17px;
+                    height: 58px;
+                    outline: none;
+                    padding: 15px 20px;
+                    transition: .2s;
+                    width: 100%;
+                }
+
+                .ig-profile-edit-input:hover {}
+
+                .nickname-submit {
+                    margin-left: 15px;
+                    align-items: center;
+                    appearance: none;
+                    background: white;
+                    border: 0;
+                    border-radius: 7px;
+                    box-sizing: border-box;
+                    color: #a75644;
+                    cursor: pointer;
+                    display: inline-flex;
+                    font-size: 17px;
+                    font-weight: 700;
+                    height: 56px;
+                    justify-content: center;
+                    padding: 0 25px;
+                    text-align: center;
+                    transition: background-color .2s;
+                    white-space: normal;
+                    width: auto;
+                }
+
+                .nickname-submit:hover {
+                    background: #a75644;
+                    color: white;
+                }
+            }
+        }
     }
 
     .settings-subtitle {
@@ -287,4 +350,5 @@
         margin-bottom: 20px;
         text-align: left;
     }
+
 }

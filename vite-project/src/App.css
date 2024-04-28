@@ -1,7 +1,6 @@
 .App {
   font-family: sans-serif;
   text-align: center;
-
 }
 
 body {
@@ -31,4 +30,45 @@ li {
 
 span {
   font-size: x-small;
+}
+
+/* botones, forms e inputs */
+label {
+  display: block;
+  margin: 10px;
+  color: #6BA2A9;
+}
+
+input,
+select {
+  width: 100%;
+  height: 100%;
+  background: #072E33;
+  border: none;
+  outline: none;
+  border: 3px solid rgba(255, 255, 255, .2);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #ffff;
+  padding: 10px 15px 10px 10px;
+}
+
+
+button {
+  width: 100%;
+  height: 45px;
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  font-weight: 700;
+}
+
+.checkbox {
+  position: relative;
+  font-size: 20px;
 }

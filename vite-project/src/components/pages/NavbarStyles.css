@@ -91,7 +91,7 @@ button:hover {
     display: none;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1000px) {
     .NavbarItems {
         height: 20px;
         z-index: 100;
