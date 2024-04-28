@@ -12,7 +12,8 @@
 
 .wrapper {
     width: 420px;
-    background: #05161A;
+    background: transparent;
+    /* #05161A */
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(30px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
@@ -33,7 +34,8 @@
     position: relative;
     width: 100%;
     height: 50px;
-    background: #294D61;
+    background: transparent;
+    /* 294D61 */
     margin: 30px 0;
 
 }
@@ -41,7 +43,8 @@
 .inputbox input {
     width: 100%;
     height: 100%;
-    background: #072E33;
+    background: transparent;
+    /* 072E33 */
     border: none;
     outline: none;
     border: 2px solid rgba(255, 255, 255, .2);
