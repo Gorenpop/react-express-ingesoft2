@@ -27,25 +27,28 @@ function CompostRequest() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
+        // Verificar si el valor de amount es negativo
+        if (formData.amount < 0) {
+            alert('El valor de litros no puede ser negativo');
+            return; // Detener el envío de la solicitud
+        }
+    
         const dataToSend = {
             ...formData,
-            amount: formData.amount,  
             price: price
         };
-
+    
         try {
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/recolecta`, dataToSend);
             console.log(response.data);
-            // Muestra un mensaje de alerta
             alert('¡La solicitud se envió correctamente!');
-            // Cierra la pestaña actual
             window.location.href = "/";
         } catch (error) {
             console.error('Error adding recolecta:', error);
-            // Aquí puedes manejar el error, por ejemplo, mostrar un mensaje de error al usuario
         }
     };
+    
 
     return (
         <div className="compost-request-container">
