@@ -150,17 +150,23 @@
     display: flex;
 }
 
-.user-profile-settings .user-profile-settings-tabs {
+.user-profile-settings ul {
     display: none;
 }
 
-.user-profile-settings .user-profile-settings-tabs.active {
-    border-right: 1px solid #a7564470;
-    display: flex;
-    flex-direction: column;
-    margin: -15px 60px -15px -15px;
+.user-profile-settings {
+    ul.active {
+        display: flex;
+        flex-direction: column;
+        margin: -15px 60px -15px -15px;
+    }
+
+    .user-profile-settings-tabs.active {
+        border-right: 1px solid #a7564470;
+    }
 
 }
+
 
 
 .user-profile-settings .user-profile-settings-tabs li {

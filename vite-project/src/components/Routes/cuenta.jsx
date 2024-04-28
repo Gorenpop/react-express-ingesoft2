@@ -61,6 +61,18 @@ function Cuenta() {
                             </ul>
                             <div className="separator mobile"></div>
                             <div className="user-profile-settings" >
+                                <ul className={ProfileTabActiveTab === 1 ?
+                                    "active-collect-tabs active" : "active-colect-tabs"} >
+                                    <h1>hello1</h1>
+                                </ul>
+                                <ul className={ProfileTabActiveTab === 2 ?
+                                    "collect-record-tabs active" : "collect-record-tabs"} >
+                                    <h1>hello2</h1>
+                                </ul>
+                                <ul className={ProfileTabActiveTab === 3 ?
+                                    "follow-collect-tabs active" : "follow-collect-tabs"} >
+                                    <h1>hello3</h1>
+                                </ul>
                                 <ul className={ProfileTabActiveTab === 4 ?
                                     "user-profile-settings-tabs active" : "user-profile-settings-tabs"} >
                                     {
@@ -81,6 +93,7 @@ function Cuenta() {
                                         })
                                     }
                                 </ul>
+
                                 <div className="separator"></div>
                                 <div className="settings-content">
                                     <div className="tab-content-settings">
