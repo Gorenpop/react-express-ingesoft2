@@ -53,10 +53,24 @@ function Cuenta() {
         setShowEditForm(true);
         calculatePrice(collect.amount);
     };
-    const calculatePrice = (amount) => {
-        const calculatedPrice = amount / 10 * 55000;
-        setCalculatedPrice(calculatedPrice);
+    const handleCancel = () => {
+        setShowEditForm(false); 
+        setEditingCollect(null);
     };
+    const handleOutsideClick = (event) => {
+        if (!event.target.closest('form[name="forms-edit-collect"]')) {
+            setShowEditForm(false);
+            setEditingCollect(null);
+        }
+    };
+    
+    const calculatePrice = (amount) => {
+        const calculatedPrice = amount * 55000;
+        const formattedPrice = new Intl.NumberFormat('es-CO').format(calculatedPrice);
+        setCalculatedPrice(formattedPrice);
+    };
+    
+    
     const handleSubmitEdit = async (event) => {
         event.preventDefault(); // Prevenir la recarga de la página
 
@@ -88,7 +102,12 @@ function Cuenta() {
                 <form name="forms-edit-collect" onSubmit={handleSubmitEdit}>
                     <div className='component-form'>
                         <label htmlFor="quality">Calidad:</label>
-                        <input type="text" id="quality" defaultValue={editingCollect.quality} />
+                        <select id="quality" name="quality" defaultValue={editingCollect.quality}>
+                            <option value="">Seleccionar calidad</option>
+                            <option value="super">Super</option>
+                            <option value="alta">Alta</option>
+                            <option value="media">Media</option>
+                        </select>
                     </div>
                     <div className='component-form'>
                         <label htmlFor="amount">Cantidad:</label>
@@ -109,10 +128,16 @@ function Cuenta() {
                         <input type="text" id="destiny" defaultValue={editingCollect.destiny} />
                     </div>
                     <div className='component-form'>
-                        <label htmlFor="type">Tipo:</label>
-                        <input type="text" id="type" defaultValue={editingCollect.type} />
+                    <select id="type" name="type" defaultValue={editingCollect.type} >
+                        <option value="">Seleccionar origen</option>
+                        <option value="vegetal">Vegetal</option>
+                        <option value="animal">Animal</option>
+                        <option value="semi-industrial">Semi-Industrial</option>
+                        <option value="semi-procesado">Semi-Procesado</option>
+                    </select>
                     </div>
                     <button type="submit">Guardar cambios</button>
+                    <button type="button" onClick={handleCancel}>Cancelar</button>
                 </form>
                 )}
                 <table className="custom-table">
