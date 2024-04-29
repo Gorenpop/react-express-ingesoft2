@@ -8,14 +8,15 @@ datasource db {
 }
 
 model api_order {
-  idOrder          BigInt            @id @default(autoincrement())
-  quality          String?           @db.VarChar(255)
+  idOrder          BigInt             @id @default(autoincrement())
+  quality          api_order_quality?
   amount           Int?
-  price            Float?            @db.Float
-  destiny          String?           @db.VarChar(255)
-  type             Int?              @db.SmallInt
+  price            Float?             @db.Float
+  destiny          String?            @db.VarChar(255)
+  type             api_order_type?
   idUser_id        BigInt?
-  api_user         api_user?         @relation(fields: [idUser_id], references: [idUser], onDelete: NoAction, onUpdate: NoAction, map: "api_order_ibfk_1")
+  activeOrder      Boolean?           @default(true)
+  api_user         api_user?          @relation(fields: [idUser_id], references: [idUser], onDelete: NoAction, onUpdate: NoAction, map: "api_order_ibfk_1")
   api_recolezction api_recolection[]
 
   @@index([idUser_id], map: "idx_api_order_idUser_id")
@@ -53,4 +54,17 @@ model api_user {
   lastSession  DateTime?   @db.DateTime(6)
   created_at   DateTime?   @db.DateTime(6)
   api_order    api_order[]
+}
+
+enum api_order_quality {
+  super
+  alta
+  media
+}
+
+enum api_order_type {
+  vegetal
+  animal
+  semi_industrial @map("semi-industrial")
+  semi_procesado  @map("semi-procesado")
 }

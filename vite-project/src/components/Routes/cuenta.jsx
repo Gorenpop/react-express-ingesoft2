@@ -3,7 +3,8 @@ import './cuentaStyles.css';
 import avatar from "../img/default-avatar.png";
 import { Link } from 'react-router-dom';
 import { ProfileTabsItems, profileConfigItems } from "./ProfileTabsItems";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function Cuenta() {
     const [ProfileTabActiveTab, setProfileTabActive] = useState(4);
@@ -18,7 +19,169 @@ function Cuenta() {
             setUserProfileSettingsActiveTab(index);
         }
     };
+    const [collects, setCollects] = useState([]);
+    const [editingCollect, setEditingCollect] = useState(null);
+    const [showEditForm, setShowEditForm] = useState(false);
+    const [calculatedPrice, setCalculatedPrice] = useState(0);
 
+
+    useEffect(() => {
+        getCollects(); 
+    }, []);
+    const getCollects = async () => {
+        try {
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/recolectaActiva`);
+            setCollects(response.data.collects);
+        } catch (error) {
+            console.error('Error getting recolectas:', error);
+            alert('Ocurrió un error al obtener las recolectas. Por favor, inténtalo de nuevo más tarde.');
+        } 
+    };
+    const handleDelete = async (idOrder) => {
+        try {
+            const response = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/recolecta/delete/${idOrder}`);
+            alert('Recolecta eliminada exitosamente');
+    
+            getCollects(); 
+        } catch (error) {
+            console.error('Error deleting collect:', error);
+            alert('Ocurrió un error al eliminar la recolecta. Por favor, inténtalo de nuevo más tarde.');
+        }
+    };
+    const handleEdit = (collect) => {
+        setEditingCollect(collect);
+        setShowEditForm(true);
+        calculatePrice(collect.amount);
+    };
+    const calculatePrice = (amount) => {
+        const calculatedPrice = amount / 10 * 55000;
+        setCalculatedPrice(calculatedPrice);
+    };
+    const handleSubmitEdit = async (event) => {
+        event.preventDefault(); // Prevenir la recarga de la página
+
+        // Obtener los datos del formulario
+        const newData = {
+            quality: event.target.quality.value,
+            amount: event.target.amount.value,
+            price: calculatedPrice, 
+            destiny: event.target.destiny.value,
+            type: event.target.type.value
+        };
+
+        try {
+            const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/recolecta/edit/${editingCollect.idOrder}`, newData);
+            alert('Los datos se actualizaron correctamente.'); // Alerta de éxito
+            setShowEditForm(false);
+            setEditingCollect(null);
+            getCollects();
+        } catch (error) {
+            console.error('Error editing collect:', error);
+            alert('Ocurrió un error al editar la recolecta. Por favor, inténtalo de nuevo más tarde.');
+        }
+    };
+
+    const renderTable = () => {
+        return (
+            <div>
+            {showEditForm && editingCollect && (
+                <form name="forms-edit-collect" onSubmit={handleSubmitEdit}>
+                    <div className='component-form'>
+                        <label htmlFor="quality">Calidad:</label>
+                        <input type="text" id="quality" defaultValue={editingCollect.quality} />
+                    </div>
+                    <div className='component-form'>
+                        <label htmlFor="amount">Cantidad:</label>
+                        <input
+                            type="number"
+                            id="amount"
+                            defaultValue={editingCollect.amount}
+                            min="0"
+                            onChange={(event) => calculatePrice(event.target.value)}
+                        />
+                    </div>
+                    <div className='component-form'>
+                        <label>Precio Calculado:</label>
+                        <span style={{ color: 'white', fontSize: '16px' }}>{calculatedPrice}</span>
+                    </div>
+                    <div className='component-form'>
+                        <label htmlFor="destiny">Destino:</label>
+                        <input type="text" id="destiny" defaultValue={editingCollect.destiny} />
+                    </div>
+                    <div className='component-form'>
+                        <label htmlFor="type">Tipo:</label>
+                        <input type="text" id="type" defaultValue={editingCollect.type} />
+                    </div>
+                    <button type="submit">Guardar cambios</button>
+                </form>
+                )}
+                <table className="custom-table">
+                    <thead>
+                        <tr>
+                            <th>idOrder</th>
+                            <th>quality</th>
+                            <th>amount</th>
+                            <th>price</th>
+                            <th>destiny</th>
+                            <th>type</th>
+                            <th>Actions</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {collects.map(collect => (
+                            <tr key={collect.idOrder}>
+                                <td>{collect.idOrder}</td>
+                                <td>{collect.quality}</td>
+                                <td>{collect.amount}</td>
+                                <td>{collect.price}</td>
+                                <td>{collect.destiny}</td>
+                                <td>{collect.type}</td>
+                                <td>
+                                    <button onClick={() => handleEdit(collect)}>Editar</button>
+                                    <button onClick={() => handleDelete(collect.idOrder)}>Cancelar</button> 
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        );
+    };
+    const renderTableGeneral = () => {
+        getCollects();
+        return (
+            <div>
+                <table className="custom-table">
+                    <thead>
+                        <tr>
+                            <th>idOrder</th>
+                            <th>quality</th>
+                            <th>amount</th>
+                            <th>price</th>
+                            <th>destiny</th>
+                            <th>type</th>
+                            <th>State</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {collects.map(collect => (
+                            <tr key={collect.idOrder}>
+                                <td>{collect.idOrder}</td>
+                                <td>{collect.quality}</td>
+                                <td>{collect.amount}</td>
+                                <td>{collect.price}</td>
+                                <td>{collect.destiny}</td>
+                                <td>{collect.type}</td>
+                                <td>{collect.activeOrder}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        );
+    };
+    
+    
 
     return (
         <>
@@ -63,11 +226,13 @@ function Cuenta() {
                             <div className="user-profile-settings" >
                                 <ul className={ProfileTabActiveTab === 1 ?
                                     "active-collect-tabs active" : "active-colect-tabs"} >
-                                    <h1>hello1</h1>
+                                    <h1 className="table-title">Recolectas activas sobre el usuarío</h1>
+                                    {renderTable()}
                                 </ul>
                                 <ul className={ProfileTabActiveTab === 2 ?
                                     "collect-record-tabs active" : "collect-record-tabs"} >
-                                    <h1>hello2</h1>
+                                    <h1 className="table-title">Total de recolectas sobre el usuarío</h1>
+                                    {renderTableGeneral()}
                                 </ul>
                                 <ul className={ProfileTabActiveTab === 3 ?
                                     "follow-collect-tabs active" : "follow-collect-tabs"} >
