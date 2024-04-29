@@ -14,10 +14,10 @@ function RegisterForm() {
     setValue,
     reset,
   } = useForm({
-    defaultValues: {
-      nombre: "Ale",
-      correo: "Escribe gono"
-    }
+    // defaultValues: {
+    //   nombre: "Ale",
+    //   correo: "Escribe gono"
+    // }
   })
   console.log(errors)
   const onSubmit = handleSubmit((data) => {
@@ -214,9 +214,9 @@ function RegisterForm() {
           <button type='submit'>
             Enviar
           </button>
-          <pre>
+          {/* <pre>
             {JSON.stringify(watch(), null, 2)}
-          </pre>
+          </pre> */}
 
         </form>
       </div>
