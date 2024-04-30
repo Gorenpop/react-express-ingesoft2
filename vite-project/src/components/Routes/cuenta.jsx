@@ -37,6 +37,15 @@ function Cuenta() {
             alert('Ocurrió un error al obtener las recolectas. Por favor, inténtalo de nuevo más tarde.');
         } 
     };
+    const getAllCollect = async () => {
+        try {
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/recolectaAll`);
+            setCollects(response.data.collects);
+        } catch (error) {
+            console.error('Error getting all collects:', error);
+            alert('Ocurrió un error al obtener todas las recolectas. Por favor, inténtalo de nuevo más tarde.');
+        } 
+    };
     const handleDelete = async (idOrder) => {
         try {
             const response = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/recolecta/delete/${idOrder}`);
@@ -148,7 +157,7 @@ function Cuenta() {
         );
     };
     const renderTableGeneral = () => {
-        getCollects();
+        getAllCollect();
         return (
             <div>
                 <table className="custom-table">

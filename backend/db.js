@@ -47,7 +47,18 @@ export async function postRecolecta(data) {
 export async function getCollect() {
     try {
         const data = await db.$queryRaw`
-        SELECT * FROM api_order WHERE activeOrder = 1 and idUser_id = 1 ; 
+        SELECT * FROM api_order WHERE activeOrder = 1; 
+        `;
+        return data; // Devolver los datos obtenidos de la base de datos
+    } catch (error) {
+        throw new Error(`Error getting active collects: ${error.message}`);
+    }
+}
+
+export async function getAllCollect() {
+    try {
+        const data = await db.$queryRaw`
+        SELECT * FROM api_order; 
         `;
         return data; // Devolver los datos obtenidos de la base de datos
     } catch (error) {
@@ -83,7 +94,7 @@ export async function editCollect(idOrder, newData) {
 // Función para eliminar una recolecta
 export async function deleteCollect(idOrder) {
     try {
-        const data = await db.$queryRaw`DELETE FROM api_order WHERE idOrder = ${idOrder}`;
+        const data = await db.$queryRaw`UPDATE api_order SET activeOrder = 1 WHERE idOrder = ${idOrder}`;
         return { success: true };
     } catch (error) {
         console.error('Error deleting collect:', error);
