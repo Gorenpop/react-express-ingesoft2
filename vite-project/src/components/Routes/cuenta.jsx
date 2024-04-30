@@ -27,6 +27,7 @@ function Cuenta() {
 
     useEffect(() => {
         getCollects(); 
+        getAllCollect();
     }, []);
     const getCollects = async () => {
         try {
