@@ -89,8 +89,6 @@
 }
 
 
-
-
 /* tabs de usuario */
 
 .profile-container .user-profile-tabs .fa-solid.fa-chevron-right {
@@ -135,14 +133,9 @@
 }
 
 
-
-
-
 .profile-container .user-profile-tabs li a:hover {
     color: #a75644;
 }
-
-
 
 /* tabs de settings de usuario */
 
@@ -166,7 +159,6 @@
     }
 
 }
-
 
 
 .user-profile-settings .user-profile-settings-tabs li {
