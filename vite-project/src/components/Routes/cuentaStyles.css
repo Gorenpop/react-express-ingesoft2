@@ -350,3 +350,48 @@
     }
 
 }
+
+.user-profile-settings {
+    position: relative; /* Establecer la posición relativa para los elementos absolutos dentro de él */
+}
+
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto ; 
+    padding-top: 100px;
+}
+
+.custom-table th,
+.custom-table td {
+
+    padding: 8px;
+    border: 1px solid white;
+    color: white;
+}
+
+.custom-table th {
+    background-color: black;
+}
+
+.custom-table tbody tr:nth-child(even) {
+    background-color: #333;
+}
+
+.custom-table tbody tr:nth-child(odd) {
+    background-color: #444;
+}
+
+.table-title {
+    position: absolute;
+    top: -30px; /* Mover el título hacia abajo */
+    left: 0;
+    width: 100%;
+    color: white;
+    font-size: 24px;
+    background-color: black;
+    padding: 10px;
+    margin: 0;
+    text-align: center; /* Centrar el título */
+}

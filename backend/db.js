@@ -33,7 +33,7 @@ export async function postRecolecta(data) {
                 ${data.idUser_id}
             )
         `;
-        
+
         if (recolecta) {
             return recolecta;
         } else {
@@ -41,11 +41,66 @@ export async function postRecolecta(data) {
         }
     } catch (error) {
         throw new Error(`Error adding recolecta: ${error.message}`);
+    };
+};
+
+export async function getCollect() {
+    try {
+        const data = await db.$queryRaw`
+        SELECT * FROM api_order WHERE activeOrder = 1; 
+        `;
+        return data; // Devolver los datos obtenidos de la base de datos
+    } catch (error) {
+        throw new Error(`Error getting active collects: ${error.message}`);
+    }
+}
+
+export async function getAllCollect() {
+    try {
+        const data = await db.$queryRaw`
+        SELECT * FROM api_order; 
+        `;
+        return data; // Devolver los datos obtenidos de la base de datos
+    } catch (error) {
+        throw new Error(`Error getting active collects: ${error.message}`);
+    }
+}
+
+// Función para editar una recolecta
+export async function editCollect(idOrder, newData) {
+    try {
+        // Ejecuta la consulta SQL utilizando queryRaw de Prisma para actualizar la recolecta
+        const recolecta = await db.$queryRaw`
+            UPDATE api_order
+            SET
+                quality = ${newData.quality},
+                amount = ${newData.amount},
+                price = ${newData.price},
+                destiny = ${newData.destiny},
+                type = ${newData.type},
+            WHERE idOrder = ${idOrder}
+        `;
+
+        return { success: true };
+    } catch (error) {
+        console.error('Error editing collect:', error);
+        throw new Error('Error editing collect');
     }
 }
 
 
 
+
+// Función para eliminar una recolecta
+export async function deleteCollect(idOrder) {
+    try {
+        const data = await db.$queryRaw`UPDATE api_order SET activeOrder = 1 WHERE idOrder = ${idOrder}`;
+        return { success: true };
+    } catch (error) {
+        console.error('Error deleting collect:', error);
+        throw new Error('Error deleting collect');
+    }
+}
 
 export async function disconnect() {
     await db.$disconnect();
