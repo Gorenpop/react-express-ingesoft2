@@ -1,0 +1,106 @@
+.vision {
+    display: flex;
+}
+
+.catchphrase {
+    text-align: center;
+    font-style: oblique;
+    color: #a75644;
+    font-weight: 100;
+}
+
+.textContent {
+    width: 60%;
+    padding-left: 5%;
+
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 600;
+    color: white;
+    text-align: left;
+    padding: 0.5rem 0 2rem 0;
+}
+
+.image {
+    display: block;
+    width: 45%;
+    height: 45%;
+    object-fit: cover;
+    opacity: 0.45;
+    mask-image: linear-gradient(to left, #05161A 50%, transparent 100%);
+}
+
+.text {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #ffffff;
+    padding: 0.5rem 0 2rem 0;
+    text-align: left;
+    white-space: pre-line;
+}
+
+.Ustitle {
+    font-size: 3rem;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    padding: 0.5rem 0 2rem 0;
+}
+
+.Uscontent {
+    display: flex;
+    text-align: center;
+
+    .teamImg {
+        width: 100%;
+        filter: grayscale(100%);
+    }
+
+    .column {
+        float: left;
+        width: 33.3%;
+        margin-bottom: 16px;
+
+        .card {
+            background-color: #25685D;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            margin: 8px;
+
+            .container {
+                padding: 0 16px;
+
+                h2 {
+                    font-size: 1.5rem;
+                    text-align: left;
+                }
+
+                .title {
+                    color: #072E33;
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}
+
+
+
+.about-section {
+    padding: 50px;
+    text-align: center;
+    background-color: #474e5d;
+    color: white;
+}
+
+.container {
+    padding: 0 16px;
+}
+
+@media screen and (max-width: 1000px) {
+    .column {
+        width: 100%;
+        display: block;
+    }
+}

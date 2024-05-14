@@ -14,7 +14,7 @@ import CompostRequest from './components/Routes/CompostRequest';
 const URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
 
 function App() {
-   return (
+  return (
     <div className='App'>
       <Routes>
         <Route path="/" element={<Home />} />

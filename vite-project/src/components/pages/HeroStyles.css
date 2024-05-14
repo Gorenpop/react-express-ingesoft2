@@ -12,7 +12,6 @@
     object-fit: cover;
     opacity: 0.45;
     mask-image: linear-gradient(#05161A 70%, transparent);
-
 }
 
 
@@ -27,14 +26,14 @@
         font-size: 3rem;
         font-weight: 800;
         background: #ffffff;
-        -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
     }
 
     h2 {
-        font-size: 1.3rem;
         color: #ffffff;
         padding: 0.5rem 0 2rem 0;
+
     }
 
     .collection-request {

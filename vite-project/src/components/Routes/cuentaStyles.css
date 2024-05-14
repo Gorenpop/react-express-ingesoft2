@@ -352,14 +352,15 @@
 }
 
 .user-profile-settings {
-    position: relative; /* Establecer la posición relativa para los elementos absolutos dentro de él */
+    position: relative;
+    /* Establecer la posición relativa para los elementos absolutos dentro de él */
 }
 
 
 .custom-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px auto ; 
+    margin: 20px auto;
     padding-top: 100px;
 }
 
@@ -385,7 +386,8 @@
 
 .table-title {
     position: absolute;
-    top: -30px; /* Mover el título hacia abajo */
+    top: -30px;
+    /* Mover el título hacia abajo */
     left: 0;
     width: 100%;
     color: white;
@@ -393,5 +395,6 @@
     background-color: black;
     padding: 10px;
     margin: 0;
-    text-align: center; /* Centrar el título */
+    text-align: center;
+    /* Centrar el título */
 }
