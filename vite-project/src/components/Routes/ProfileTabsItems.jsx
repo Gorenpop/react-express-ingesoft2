@@ -1,7 +1,7 @@
 export const ProfileTabsItems = [
     {
         title: "Agendar recolección",
-        url: "/Compost-with-us",
+        url: "/compost-request",
         cName: "profile-tab-links-colection",
         cNameActive: "profile-tab-links-colection active",
     },

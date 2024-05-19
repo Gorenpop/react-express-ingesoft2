@@ -1,5 +1,6 @@
 import Navbar from '../pages/Navbar';
 import './cuentaStyles.css';
+import './cuentaRecStyles.css';
 import avatar from "../img/default-avatar.png";
 import { Link } from 'react-router-dom';
 import { ProfileTabsItems, profileConfigItems } from "./ProfileTabsItems";
@@ -26,7 +27,7 @@ function Cuenta() {
 
 
     useEffect(() => {
-        getCollects(); 
+        getCollects();
         getAllCollect();
     }, []);
     const getCollects = async () => {
@@ -36,7 +37,7 @@ function Cuenta() {
         } catch (error) {
             console.error('Error getting recolectas:', error);
             alert('Ocurrió un error al obtener las recolectas. Por favor, inténtalo de nuevo más tarde.');
-        } 
+        }
     };
     const getAllCollect = async () => {
         try {
@@ -45,14 +46,14 @@ function Cuenta() {
         } catch (error) {
             console.error('Error getting all collects:', error);
             alert('Ocurrió un error al obtener todas las recolectas. Por favor, inténtalo de nuevo más tarde.');
-        } 
+        }
     };
     const handleDelete = async (idOrder) => {
         try {
             const response = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/recolecta/delete/${idOrder}`);
             alert('Recolecta eliminada exitosamente');
-    
-            getCollects(); 
+
+            getCollects();
         } catch (error) {
             console.error('Error deleting collect:', error);
             alert('Ocurrió un error al eliminar la recolecta. Por favor, inténtalo de nuevo más tarde.');
@@ -74,7 +75,7 @@ function Cuenta() {
         const newData = {
             quality: event.target.quality.value,
             amount: event.target.amount.value,
-            price: calculatedPrice, 
+            price: calculatedPrice,
             destiny: event.target.destiny.value,
             type: event.target.type.value
         };
@@ -94,36 +95,36 @@ function Cuenta() {
     const renderTable = () => {
         return (
             <div>
-            {showEditForm && editingCollect && (
-                <form name="forms-edit-collect" onSubmit={handleSubmitEdit}>
-                    <div className='component-form'>
-                        <label htmlFor="quality">Calidad:</label>
-                        <input type="text" id="quality" defaultValue={editingCollect.quality} />
-                    </div>
-                    <div className='component-form'>
-                        <label htmlFor="amount">Cantidad:</label>
-                        <input
-                            type="number"
-                            id="amount"
-                            defaultValue={editingCollect.amount}
-                            min="0"
-                            onChange={(event) => calculatePrice(event.target.value)}
-                        />
-                    </div>
-                    <div className='component-form'>
-                        <label>Precio Calculado:</label>
-                        <span style={{ color: 'white', fontSize: '16px' }}>{calculatedPrice}</span>
-                    </div>
-                    <div className='component-form'>
-                        <label htmlFor="destiny">Destino:</label>
-                        <input type="text" id="destiny" defaultValue={editingCollect.destiny} />
-                    </div>
-                    <div className='component-form'>
-                        <label htmlFor="type">Tipo:</label>
-                        <input type="text" id="type" defaultValue={editingCollect.type} />
-                    </div>
-                    <button type="submit">Guardar cambios</button>
-                </form>
+                {showEditForm && editingCollect && (
+                    <form name="forms-edit-collect" onSubmit={handleSubmitEdit}>
+                        <div className='component-form'>
+                            <label htmlFor="quality">Calidad:</label>
+                            <input type="text" id="quality" defaultValue={editingCollect.quality} />
+                        </div>
+                        <div className='component-form'>
+                            <label htmlFor="amount">Cantidad:</label>
+                            <input
+                                type="number"
+                                id="amount"
+                                defaultValue={editingCollect.amount}
+                                min="0"
+                                onChange={(event) => calculatePrice(event.target.value)}
+                            />
+                        </div>
+                        <div className='component-form'>
+                            <label>Precio Calculado:</label>
+                            <span style={{ color: 'white', fontSize: '16px' }}>{calculatedPrice}</span>
+                        </div>
+                        <div className='component-form'>
+                            <label htmlFor="destiny">Destino:</label>
+                            <input type="text" id="destiny" defaultValue={editingCollect.destiny} />
+                        </div>
+                        <div className='component-form'>
+                            <label htmlFor="type">Tipo:</label>
+                            <input type="text" id="type" defaultValue={editingCollect.type} />
+                        </div>
+                        <button type="submit">Guardar cambios</button>
+                    </form>
                 )}
                 <table className="custom-table">
                     <thead>
@@ -134,7 +135,7 @@ function Cuenta() {
                             <th>price</th>
                             <th>destiny</th>
                             <th>type</th>
-                            <th>Actions</th> 
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -148,7 +149,7 @@ function Cuenta() {
                                 <td>{collect.type}</td>
                                 <td>
                                     <button onClick={() => handleEdit(collect)}>Editar</button>
-                                    <button onClick={() => handleDelete(collect.idOrder)}>Cancelar</button> 
+                                    <button onClick={() => handleDelete(collect.idOrder)}>Cancelar</button>
                                 </td>
                             </tr>
                         ))}
@@ -170,7 +171,7 @@ function Cuenta() {
                             <th>price</th>
                             <th>destiny</th>
                             <th>type</th>
-                            <th>State</th> 
+                            <th>State</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -190,8 +191,8 @@ function Cuenta() {
             </div>
         );
     };
-    
-    
+
+
 
     return (
         <>
@@ -232,7 +233,7 @@ function Cuenta() {
                                     );
                                 })}
                             </ul>
-                            <div className="separator mobile"></div>
+                            <div className="separator"></div>
                             <div className="user-profile-settings" >
                                 <ul className={ProfileTabActiveTab === 1 ?
                                     "active-collect-tabs active" : "active-colect-tabs"} >

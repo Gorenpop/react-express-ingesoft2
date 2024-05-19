@@ -52,6 +52,10 @@
 .Uscontent {
     display: flex;
     text-align: center;
+    width: 80%;
+    align-items: center;
+    margin-left: 10%;
+
 
     .teamImg {
         width: 100%;
@@ -99,8 +103,7 @@
 }
 
 @media screen and (max-width: 1000px) {
-    .column {
-        width: 100%;
+    .Uscontent {
         display: block;
     }
 }
